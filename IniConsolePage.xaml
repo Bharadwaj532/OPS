@@ -1,0 +1,106 @@
+﻿<Page x:Class="PackageConsole.IniConsolePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      mc:Ignorable="d"
+      d:DesignHeight="650" d:DesignWidth="900"
+      Title="IniConsolePage">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 🔹 ROW 0: Section and Button Bar -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,0,0,10" HorizontalAlignment="Left">
+            <Label Content="Section:" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0"/>
+            <ComboBox x:Name="cmbSections" Width="200" SelectionChanged="cmbSections_SelectionChanged" Margin="0,0,20,0"/>
+
+            <Button x:Name="btnInsert" Width="100" Margin="0,0,10,0" Click="btnInsert_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/insert.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                    <TextBlock Text="Insert"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnUpdate" Width="100" Margin="0,0,10,0" Click="btnUpdate_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/update.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                    <TextBlock Text="Update"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnAddSection" Width="100" Margin="0,0,10,0" Click="btnAddSection_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/add.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                    <TextBlock Text="Post Config"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="btnRemoveSection" Width="113" Margin="0,0,10,0" Click="btnRemoveSection_Click">
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="Images/remove.png" Width="16" Height="16" Margin="0,0,5,0"/>
+                    <TextBlock Text="Remove Section"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="btnUndo" Width="100" Margin="0,0,10,0" Click="btnUndo_Click">
+                <StackPanel Orientation="Horizontal">
+                    <!-- <Image Source="Images/remove.png" Width="16" Height="16" Margin="0,0,5,0"/> -->
+                    <TextBlock Text="Undo Change"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+        <!-- 🔸 ROW 1: Editor & INI Content Area -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- 🎛️ Key-Value Editor Panel -->
+            <Border Grid.Column="0" BorderThickness="1" BorderBrush="#FFFBE9E9" CornerRadius="6" Background="White" Margin="0,0,50,0"  VerticalAlignment="Top">
+                <StackPanel Background="#1A1A2E">
+                    
+                    <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <StackPanel x:Name="stackKeyValueEditor" Margin="2" Background="#1A1A2E" RenderTransformOrigin="0.5,0.5">
+                        <StackPanel.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform/>
+                                <SkewTransform AngleX="0"/>
+                                <RotateTransform/>
+                                <TranslateTransform X="0"/>
+                            </TransformGroup>
+                        </StackPanel.RenderTransform>
+                    </StackPanel>
+                </ScrollViewer>
+                    <!-- 🔘 Delete Mode Toggle -->
+                    <StackPanel Orientation="Horizontal" Margin="10,10,10,0">
+                        <TextBlock Text="Enable Delete Key Mode?" Foreground="White" VerticalAlignment="Center" Margin="0,0,10,0" FontWeight="Bold"/>
+                        <RadioButton x:Name="radioDeleteYes" Content="Yes" Foreground="White" GroupName="DeleteToggle" Checked="DeleteToggle_Checked" Margin="0,0,10,0"/>
+                        <RadioButton x:Name="radioDeleteNo" Content="No" Foreground="White" GroupName="DeleteToggle" Checked="DeleteToggle_Checked" IsChecked="True"/>
+                    </StackPanel>
+                </StackPanel>
+                
+            </Border>
+            
+
+            <!-- 📝 INI Content Panel -->
+            <!-- INI CONTENT PANEL (Right Side) -->
+            <Border Grid.Column="1" BorderThickness="1" BorderBrush="#FFFBE9E9" CornerRadius="6" Background="White" Margin="0,0,0,0">
+                <RichTextBox x:Name="richIniContent"
+                 FontSize="12"
+                 FontFamily="Consolas"
+                 IsReadOnly="True"
+                 Background="#1A1A2E"
+                 Foreground="LightGray"
+                 BorderThickness="0"
+                 Padding="10"
+                 HorizontalScrollBarVisibility="Auto"
+                 VerticalScrollBarVisibility="Auto" />
+            </Border>
+        </Grid>
+    </Grid>
+</Page>
